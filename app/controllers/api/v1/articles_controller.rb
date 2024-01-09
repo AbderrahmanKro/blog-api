@@ -1,6 +1,6 @@
 class Api::V1::ArticlesController < Api::V1::BaseController
   acts_as_token_authentication_handler_for User, except: [ :index, :show ]
-  before_action :set_article, only: [ :show, :update ]
+  before_action :set_article, only: [ :show, :update, :destroy ]
   def index
     @articles = policy_scope(Article)
   end
@@ -27,6 +27,10 @@ class Api::V1::ArticlesController < Api::V1::BaseController
     end
   end
 
+  def destroy
+    @article.destroy
+    head :no_content
+  end
 
   private
 

@@ -18,4 +18,9 @@ class ArticlePolicy < ApplicationPolicy
     !user.nil?
   end
 
+  def destroy?
+    # Only article owner can destroy it
+    update? # Same as: record.user == user
+  end
+
 end
