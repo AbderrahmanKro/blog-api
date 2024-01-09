@@ -16,6 +16,18 @@ class Api::V1::ArticlesController < Api::V1::BaseController
     end
   end
 
+  def create
+    @article = Article.new(article_params)
+    @article.user = current_user
+    authorize @article
+    if @article.save
+      render :show, status: :created
+    else
+      render_error
+    end
+  end
+
+
   private
 
   def set_article

@@ -13,4 +13,9 @@ class ArticlePolicy < ApplicationPolicy
     # Only article owner can update it
     record.user == user
   end
+  def create?
+    # Any logged in user can create a article
+    !user.nil?
+  end
+
 end
