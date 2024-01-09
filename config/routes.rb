@@ -7,9 +7,10 @@ Rails.application.routes.draw do
   # root "articles#index"
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :articles, only: [ :index, :show, :create, :update, :destroy ]
+      resources :articles, only: [ :index, :show, :create, :update, :destroy ] do
         resources :comments, only: [ :index, :create, :destroy ]
       end
     resources :users, only: [ :index, :show ]
   end
+end
 end
